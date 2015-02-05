@@ -7,21 +7,36 @@ try:
         DEBUG=True,
         USE_TZ=True,
         DATABASES={
-            "default": {
-                "ENGINE": "django.db.backends.sqlite3",
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
             }
         },
         MIDDLEWARE_CLASSES=[
         ],
-        ROOT_URLCONF="cdn_js.urls",
+        ROOT_URLCONF='cdn_js.urls',
         INSTALLED_APPS=[
-            "django.contrib.auth",
-            "django.contrib.contenttypes",
-            "django.contrib.sites",
-            "cdn_js",
+            'django.contrib.auth',
+            'django.contrib.contenttypes',
+            'django.contrib.sites',
+            'django.contrib.staticfiles',
+            'djangobower',
+            'cdn_js',
         ],
+        STATICFILES_FINDERS=(
+            'django.contrib.staticfiles.finders.FileSystemFinder',
+            'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+            'cdn_js.finders.CDNFinder',
+        ),
+        STATIC_URL='/static/',
         SITE_ID=1,
         NOSE_ARGS=['-s'],
+        BOWER_INSTALLED_APPS=[
+            'jquery#2.1.3'
+        ],
+        # TODO: use temporary folders
+        BOWER_COMPONENTS_ROOT='tests/bower_components',
+        STATIC_ROOT='tests/staticfiles',
+        CDN_BACKEND='cdn_js.backends.cdn_jsdelivr',
     )
 
     try:
