@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import requests
-from urlparse import urljoin
+try:
+    from urlparse import urljoin
+except ImportError:
+    from urllib.parse import urljoin
 
 
 class CDNAPIJsDelivrBackend(object):
