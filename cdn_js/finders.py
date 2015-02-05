@@ -44,7 +44,9 @@ class CDNFinder(BaseFinder):
         urls = {}
         backend = self.get_backend()
         for filename in backend.list_package_files(package, version):
-            urls[filename] = backend.get_file_url(package, version, filename)
+            url = backend.get_file_url(package, version, filename)
+            if url:
+                urls[filename] = url
         return urls
 
     def list(self, ignore_pattern):

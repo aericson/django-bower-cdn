@@ -25,6 +25,7 @@ try:
         STATICFILES_FINDERS=(
             'django.contrib.staticfiles.finders.FileSystemFinder',
             'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+            'djangobower.finders.BowerFinder',
             'cdn_js.finders.CDNFinder',
         ),
         STATIC_URL='/static/',

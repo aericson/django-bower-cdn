@@ -43,3 +43,4 @@ docs/_build
 
 # temp test files
 tests/bower_components/*
+tests/staticfiles/*

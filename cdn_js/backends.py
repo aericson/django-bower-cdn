@@ -30,7 +30,11 @@ class CDNAPIJsDelivrBackend(object):
             return None
 
     def get_file_url(self, package_name, version, filename):
-        return self.join_url(self.basepath, package_name, version, filename)
+        url = self.join_url(self.basepath, package_name, version, filename)
+        if requests.head(url).status_code == requests.codes.OK:
+            return url
+        else:
+            return None
 
 
 cdn_jsdelivr = CDNAPIJsDelivrBackend(
