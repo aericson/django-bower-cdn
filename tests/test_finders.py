@@ -26,6 +26,9 @@ class CDNFinderTestCase(TestCase):
         call_command('bower', 'install')
         # create some garbage
         mommy.make(CDNFile, _quantity=3)
+        # create a wrong/old url
+        CDNFile.objects.create(version='2.1.3', url='asdada',
+                               filename='jquery.js', package='jquery')
         with patch('cdn_js.backends.cdn_jsdelivr', FakeBackend()):
             call_command('collectstatic', interactive=False)
 
