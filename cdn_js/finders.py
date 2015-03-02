@@ -35,6 +35,7 @@ class CDNFinder(BaseFinder):
                 except CDNFile.DoesNotExist:
                     CDNFile.objects.create(filename=filename, package=pkg_name,
                                            version=version, url=url)
+        # TODO: cleanup old versions
         self._clean_up_database(exclude=packages)
 
     def _clean_up_database(self, exclude):

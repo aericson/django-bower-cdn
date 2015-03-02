@@ -32,7 +32,8 @@ try:
         SITE_ID=1,
         NOSE_ARGS=['-s'],
         BOWER_INSTALLED_APPS=[
-            'jquery#2.1.3'
+            'jquery#2.1.3',
+            'bootstrap#3.3.2',
         ],
         # TODO: use temporary folders
         BOWER_COMPONENTS_ROOT='tests/bower_components',
