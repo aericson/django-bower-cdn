@@ -2,6 +2,7 @@
 
 from django.test import TestCase
 from django.core.management import call_command
+from django.template import Template, Context
 
 from mock import patch
 
@@ -44,3 +45,9 @@ class CDNTestCase(TestCase):
         cls.preCollectStatic()
         with patch('cdn_js.backends.cdn_jsdelivr', FakeBackend()):
             call_command('collectstatic', interactive=False)
+
+
+class CDNStaticTestAssertionsMixin(object):
+    def assertCDNStaticEqual(self, content, expected):
+        t = Template("{%% load cdn %%}{%% cdn_static '%s' %%}" % content)
+        self.assertEquals(expected, t.render(Context({})))

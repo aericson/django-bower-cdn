@@ -1,15 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from django.template import Template, Context
+from tests.utils import (CDNTestCase, TEST_JQUERY_VERSION,
+                         CDNStaticTestAssertionsMixin)
 
-from tests.utils import CDNTestCase, TEST_JQUERY_VERSION
 
-
-class CDNStaticTestCase(CDNTestCase):
-
-    def assertCDNStaticEqual(self, content, expected):
-        t = Template("{%% load cdn %%}{%% cdn_static '%s' %%}" % content)
-        self.assertEquals(expected, t.render(Context({})))
+class CDNStaticTest(CDNStaticTestAssertionsMixin, CDNTestCase):
 
     def test_cdn_js_with_debug_unknown_file(self):
         with self.settings(DEBUG=True):

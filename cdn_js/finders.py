@@ -23,6 +23,9 @@ class CDNFinder(BaseFinder):
         for package in bower.bower_adapter.freeze():
             pkg_name, version = package.split('#')
             packages.append(pkg_name)
+            # delete left over from different versions
+            CDNFile.objects.filter(package=pkg_name).exclude(
+                version=version).delete()
             urls = self._find_in_cdn(pkg_name, version)
             for filename, url in urls.items():
                 try:
@@ -35,7 +38,6 @@ class CDNFinder(BaseFinder):
                 except CDNFile.DoesNotExist:
                     CDNFile.objects.create(filename=filename, package=pkg_name,
                                            version=version, url=url)
-        # TODO: cleanup old versions
         self._clean_up_database(exclude=packages)
 
     def _clean_up_database(self, exclude):

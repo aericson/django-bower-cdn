@@ -7,7 +7,7 @@ from cdn_js.backends import cdn_jsdelivr
 from tests.utils import TEST_JQUERY_VERSION
 
 
-class TestCDNJSDelivrBackend(TestCase):
+class CDNJSDelivrBackendTest(TestCase):
 
     @responses.activate
     def test_list_package_files(self):
