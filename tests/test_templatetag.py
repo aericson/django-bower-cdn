@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from tests.utils import (CDNTestCase, TEST_JQUERY_VERSION,
-                         CDNStaticTestAssertionsMixin)
+                         CDNStaticTestAssertionsMixin, TEST_BOOTSTRAP_VERSION)
 
 
 class CDNStaticTest(CDNStaticTestAssertionsMixin, CDNTestCase):
@@ -23,3 +23,9 @@ class CDNStaticTest(CDNStaticTestAssertionsMixin, CDNTestCase):
     def test_cdn_js_without_debug_unknown_file(self):
         self.assertCDNStaticEqual('jquery/src/ajax.js',
                                   '/static/jquery/src/ajax.js')
+
+    def test_cdn_css_without_debug_from_bootstrap(self):
+        self.assertCDNStaticEqual('bootstrap/dist/css/bootstrap.css',
+                                  'https://cdn.jsdelivr.net/bootstrap/' +
+                                  TEST_BOOTSTRAP_VERSION +
+                                  '/css/bootstrap.css')

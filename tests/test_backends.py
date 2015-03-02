@@ -12,11 +12,11 @@ class CDNJSDelivrBackendTest(TestCase):
     @responses.activate
     def test_list_package_files(self):
         responses.add(responses.GET,
-                      'http://api.jsdelivr.com/v1/jsdelivr/libraries/jquery/' +
+                      'https://api.jsdelivr.com/v1/jsdelivr/libraries/jquery/' +
                       TEST_JQUERY_VERSION,
                       body='["jquery.js", "jquery.min.js", "jquery.min.map"]')
         responses.add(responses.GET,
-                      'http://api.jsdelivr.com/v1/jsdelivr/libraries/'
+                      'https://api.jsdelivr.com/v1/jsdelivr/libraries/'
                       'nonexistentpackage/2.3.3',
                       status=500)
         self.assertEquals(cdn_jsdelivr.list_package_files('jquery',
@@ -28,16 +28,16 @@ class CDNJSDelivrBackendTest(TestCase):
     @responses.activate
     def test_get_file_url(self):
         responses.add(responses.HEAD,
-                      'http://cdn.jsdelivr.net/jquery/%s/jquery.js' %
+                      'https://cdn.jsdelivr.net/jquery/%s/jquery.js' %
                       TEST_JQUERY_VERSION)
         responses.add(responses.HEAD,
-                      'http://cdn.jsdelivr.net/jquasdery/%s/jquery.js' %
+                      'https://cdn.jsdelivr.net/jquasdery/%s/jquery.js' %
                       TEST_JQUERY_VERSION,
                       status=404)
         self.assertEquals(cdn_jsdelivr.get_file_url('jquery',
                                                     TEST_JQUERY_VERSION,
                                                     'jquery.js'),
-                          'http://cdn.jsdelivr.net/jquery/%s/jquery.js'
+                          'https://cdn.jsdelivr.net/jquery/%s/jquery.js'
                           % TEST_JQUERY_VERSION)
         self.assertEquals(cdn_jsdelivr.get_file_url('jquasdery',
                                                     TEST_JQUERY_VERSION,

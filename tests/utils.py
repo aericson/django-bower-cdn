@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
-
+import django
 from django.test import TestCase
 from django.core.management import call_command
 from django.template import Template, Context
 
 from mock import patch
 
+from cdn_js.models import CDNFile
+
 TEST_JQUERY_VERSION = "2.1.3"
+TEST_BOOTSTRAP_VERSION = "3.3.2"
 
 
 class FakeBackend(object):
@@ -24,7 +27,9 @@ class FakeBackend(object):
                     "fonts/glyphicons-halflings-regular.woff",
                     "fonts/glyphicons-halflings-regular.woff2",
                     "js/bootstrap.js", "js/bootstrap.min.js",
-                    "js/npm.js"]
+                    "js/npm.js",
+                    "js/hola.js",  # dupplicated file
+                    "js/js/hola/hola.js"]  # dupplicated file
         else:
             return []
 
@@ -33,7 +38,19 @@ class FakeBackend(object):
                 filename)
 
 
-class CDNTestCase(TestCase):
+class ClearCacheOfFinderMixin(object):
+    @classmethod
+    def tearDownClass(cls):
+        from django.contrib.staticfiles.finders import get_finder
+        if django.VERSION >= (1, 7):
+            get_finder.cache_clear()
+        else:
+            from django.contrib.staticfiles.finders import _finders
+            _finders.clear()
+        super(ClearCacheOfFinderMixin, cls).tearDownClass()
+
+
+class CDNTestCase(ClearCacheOfFinderMixin, TestCase):
 
     @classmethod
     def preCollectStatic(cls):
@@ -45,6 +62,11 @@ class CDNTestCase(TestCase):
         cls.preCollectStatic()
         with patch('cdn_js.backends.cdn_jsdelivr', FakeBackend()):
             call_command('collectstatic', interactive=False)
+
+    @classmethod
+    def tearDownClass(cls):
+        CDNFile.objects.all().delete()
+        super(CDNTestCase, cls).tearDownClass()
 
 
 class CDNStaticTestAssertionsMixin(object):

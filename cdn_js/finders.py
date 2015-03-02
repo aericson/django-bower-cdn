@@ -27,6 +27,8 @@ class CDNFinder(BaseFinder):
             CDNFile.objects.filter(package=pkg_name).exclude(
                 version=version).delete()
             urls = self._find_in_cdn(pkg_name, version)
+            self.remove_duplicated_files(urls)
+            self.normalize_filename_in_urls_dict(urls)
             for filename, url in urls.items():
                 try:
                     cdn_file = CDNFile.objects.get(filename=filename,
@@ -39,6 +41,34 @@ class CDNFinder(BaseFinder):
                     CDNFile.objects.create(filename=filename, package=pkg_name,
                                            version=version, url=url)
         self._clean_up_database(exclude=packages)
+
+    def normalize_filename_in_urls_dict(self, urls):
+        for filename, url in list(urls.items()):
+            new_filename = self.normalize_filename(filename)
+            if new_filename != filename:
+                del urls[filename]
+                urls[new_filename] = url
+
+    def normalize_filename(self, fname):
+        """
+        get the name of the file without any path css/hello.js -> hello.js
+        """
+        return [x for x in fname.split('/') if x][-1]
+
+    def remove_duplicated_files(self, urls):
+        """
+        if there are more than one file with same name in a package
+        we ignore it to avoid ambiguity.
+        """
+        entries = {}
+        for filename, _ in list(urls.items()):
+            filename_no_dir = self.normalize_filename(filename)
+            entries[filename_no_dir] = (entries.get(filename_no_dir, []) +
+                                        [filename])
+        to_remove = filter(lambda x: len(x) > 1, entries.values())
+        for ambiguity in to_remove:
+            for filename in ambiguity:
+                del urls[filename]
 
     def _clean_up_database(self, exclude):
         CDNFile.objects.exclude(package__in=exclude).delete()

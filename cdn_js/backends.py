@@ -38,5 +38,5 @@ class CDNAPIJsDelivrBackend(object):
 
 
 cdn_jsdelivr = CDNAPIJsDelivrBackend(
-    basepath='http://cdn.jsdelivr.net/',
-    queryurl='http://api.jsdelivr.com/v1/jsdelivr/libraries/')
+    basepath='https://cdn.jsdelivr.net/',
+    queryurl='https://api.jsdelivr.com/v1/jsdelivr/libraries/')
