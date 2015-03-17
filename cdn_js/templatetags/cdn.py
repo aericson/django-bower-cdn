@@ -19,11 +19,12 @@ class CDNStaticNode(StaticNode):
 
     def url(self, context):
         path = self.path.resolve(context)
-        if settings.DEBUG:
+        if settings.DEBUG and not getattr(settings, 'CDN_FORCE_CDN', False):
             return static(path)
         else:
-            package = path.split('/')[0]
-            filename = path.split('/')[-1]
+            splitted = [x for x in path.split('/') if x]
+            package = splitted[0]
+            filename = splitted[-1]
             try:
                 return CDNFile.objects.get(package=package,
                                            filename=filename).url

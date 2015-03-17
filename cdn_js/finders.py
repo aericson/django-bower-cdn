@@ -19,6 +19,8 @@ class CDNFinder(BaseFinder):
     def __init__(self, apps=None, *args, **kwargs):
         self.storages = {}
         self.locations = []
+        if settings.DEBUG and not getattr(settings, 'CDN_FORCE_CDN', False):
+            return
         packages = []
         for package in bower.bower_adapter.freeze():
             pkg_name, version = package.split('#')
@@ -84,3 +86,6 @@ class CDNFinder(BaseFinder):
 
     def list(self, ignore_pattern):
         return iter([])
+
+    def find(self, *args, **kwargs):
+        return None

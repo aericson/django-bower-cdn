@@ -23,7 +23,7 @@ class CDNJSDelivrBackendTest(TestCase):
                           TEST_JQUERY_VERSION),
                           ['jquery.js', 'jquery.min.js', 'jquery.min.map'])
         self.assertEquals(cdn_jsdelivr.list_package_files('nonexistentpackage',
-                                                          '2.3.3'), None)
+                                                          '2.3.3'), [])
 
     @responses.activate
     def test_get_file_url(self):

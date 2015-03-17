@@ -29,3 +29,13 @@ class CDNStaticTest(CDNStaticTestAssertionsMixin, CDNTestCase):
                                   'https://cdn.jsdelivr.net/bootstrap/' +
                                   TEST_BOOTSTRAP_VERSION +
                                   '/css/bootstrap.css')
+
+    def test_with_leading_slash(self):
+        self.assertCDNStaticEqual('jquery/dist/jquery.js/',
+                                  'https://cdn.jsdelivr.net/%s/%s/%s' %
+                                  ('jquery', TEST_JQUERY_VERSION, 'jquery.js'))
+
+    def test_with_starting_with_slash(self):
+        self.assertCDNStaticEqual('/jquery/dist/jquery.js',
+                                  'https://cdn.jsdelivr.net/%s/%s/%s' %
+                                  ('jquery', TEST_JQUERY_VERSION, 'jquery.js'))

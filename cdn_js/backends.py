@@ -27,7 +27,7 @@ class CDNAPIJsDelivrBackend(object):
         try:
             return requests.get(url).json()
         except ValueError:
-            return None
+            return []
 
     def get_file_url(self, package_name, version, filename):
         url = self.join_url(self.basepath, package_name, version, filename)
@@ -40,3 +40,11 @@ class CDNAPIJsDelivrBackend(object):
 cdn_jsdelivr = CDNAPIJsDelivrBackend(
     basepath='https://cdn.jsdelivr.net/',
     queryurl='https://api.jsdelivr.com/v1/jsdelivr/libraries/')
+
+cdn_google = CDNAPIJsDelivrBackend(
+    basepath='https://ajax.googleapis.com/ajax/libs/',
+    queryurl='https://api.jsdelivr.com/v1/google/libraries/')
+
+cdn_bootstrap = CDNAPIJsDelivrBackend(
+    basepath='https://maxcdn.bootstrapcdn.com',
+    queryurl='https://api.jsdelivr.com/v1/bootstrap/libraries/')
