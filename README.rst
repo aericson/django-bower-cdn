@@ -1,33 +1,55 @@
 =============================
-django-cdn-js
+django-bower-cdn
 =============================
 
-.. image:: https://badge.fury.io/py/django-cdn-js.png
-    :target: https://badge.fury.io/py/django-cdn-js
 
-.. image:: https://travis-ci.org/aericson/django-cdn-js.png?branch=master
-    :target: https://travis-ci.org/aericson/django-cdn-js
+Automatic add CDN for your local django-bower installed libs.
 
-.. image:: https://coveralls.io/repos/aericson/django-cdn-js/badge.png?branch=master
-    :target: https://coveralls.io/r/aericson/django-cdn-js?branch=master
+.. DANGER::
+   This lib is not production ready yet.
 
-Automatic add CDN for your local django-bower installed javascript libs
 
 Documentation
 -------------
 
-The full documentation is at https://django-cdn-js.readthedocs.org.
+The full documentation is at https://django-bower-cdn.readthedocs.org.
 
 Quickstart
 ----------
 
-Install django-cdn-js::
+Install django-bower-cdn::
 
-    pip install django-cdn-js
+    pip install django-bower-cdn
 
-Then use it in a project::
+Install and configure django-bower from https://github.com/nvbn/django-bower/
 
-    import django-cdn-js
+Add django-bower-cdn to `INSTALLED_APPS` in your settings::
+
+.. code-block:: python
+
+    'cdn_js',
+
+Add staticfinder to `STATICFILES_FINDERS`::
+
+.. code-block:: python
+
+    'cdn_js.finders.CDNFinder',
+
+Add a backend to your settings::
+
+.. code-block:: python
+
+    CDN_BACKEND = 'cdn_js.backends.cdn_jsdelivr'
+
+Now instead of using staticfiles on your templates use::
+
+.. code-block:: django
+
+  {% load cdn %}
+
+  {% cdn_static 'bootstrap/dist/js/bootstrap.js' %}
+
+When possible your assets will be linked to the public CDN used as backend on settings when DEBUG is False.
 
 Features
 --------

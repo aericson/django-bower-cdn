@@ -46,7 +46,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'django-cdn-js'
+project = u'django-bower-cdn'
 copyright = u'2015, André Ericson'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -173,7 +173,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'django-cdn-jsdoc'
+htmlhelp_basename = 'django-bower-cdndoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -192,7 +192,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'django-cdn-js.tex', u'django-cdn-js Documentation',
+  ('index', 'django-bower-cdn.tex', u'django-bower-cdn Documentation',
    u'André Ericson', 'manual'),
 ]
 
@@ -222,7 +222,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'django-cdn-js', u'django-cdn-js Documentation',
+    ('index', 'django-bower-cdn', u'django-bower-cdn Documentation',
      [u'André Ericson'], 1)
 ]
 
@@ -236,8 +236,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'django-cdn-js', u'django-cdn-js Documentation',
-   u'André Ericson', 'django-cdn-js', 'One line description of project.',
+  ('index', 'django-bower-cdn', u'django-bower-cdn Documentation',
+   u'André Ericson', 'django-bower-cdn', 'One line description of project.',
    'Miscellaneous'),
 ]
 

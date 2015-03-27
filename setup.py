@@ -24,27 +24,27 @@ readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
-    name='django-cdn-js',
+    name='django-bower-cdn',
     version=version,
     description="""Automatic add CDN for your local django-bower installed javascript libs""",
     long_description=readme + '\n\n' + history,
     author='André Ericson',
     author_email='de.ericson@gmail.com',
-    url='https://github.com/aericson/django-cdn-js',
+    url='https://github.com/aericson/django-bower-cdn',
     packages=[
         'cdn_js',
     ],
     include_package_data=True,
     install_requires=[
     ],
-    license="BSD",
+    license="MIT",
     zip_safe=False,
-    keywords='django-cdn-js',
+    keywords='django-bower-cdn',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Framework :: Django',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: BSD License',
+        'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.6',

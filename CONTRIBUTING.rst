@@ -13,7 +13,7 @@ Types of Contributions
 Report Bugs
 ~~~~~~~~~~~
 
-Report bugs at https://github.com/aericson/django-cdn-js/issues.
+Report bugs at https://github.com/aericson/django-bower-cdn/issues.
 
 If you are reporting a bug, please include:
 
@@ -36,14 +36,14 @@ is open to whoever wants to implement it.
 Write Documentation
 ~~~~~~~~~~~~~~~~~~~
 
-django-cdn-js could always use more documentation, whether as part of the 
-official django-cdn-js docs, in docstrings, or even on the web in blog posts,
+django-bower-cdn could always use more documentation, whether as part of the 
+official django-bower-cdn docs, in docstrings, or even on the web in blog posts,
 articles, and such.
 
 Submit Feedback
 ~~~~~~~~~~~~~~~
 
-The best way to send feedback is to file an issue at https://github.com/aericson/django-cdn-js/issues.
+The best way to send feedback is to file an issue at https://github.com/aericson/django-bower-cdn/issues.
 
 If you are proposing a feature:
 
@@ -55,17 +55,17 @@ If you are proposing a feature:
 Get Started!
 ------------
 
-Ready to contribute? Here's how to set up `django-cdn-js` for local development.
+Ready to contribute? Here's how to set up `django-bower-cdn` for local development.
 
-1. Fork the `django-cdn-js` repo on GitHub.
+1. Fork the `django-bower-cdn` repo on GitHub.
 2. Clone your fork locally::
 
-    $ git clone git@github.com:your_name_here/django-cdn-js.git
+    $ git clone git@github.com:your_name_here/django-bower-cdn.git
 
 3. Install your local copy into a virtualenv. Assuming you have virtualenvwrapper installed, this is how you set up your fork for local development::
 
-    $ mkvirtualenv django-cdn-js
-    $ cd django-cdn-js/
+    $ mkvirtualenv django-bower-cdn
+    $ cd django-bower-cdn/
     $ python setup.py develop
 
 4. Create a branch for local development::
@@ -101,7 +101,7 @@ Before you submit a pull request, check that it meets these guidelines:
    your new functionality into a function with a docstring, and add the
    feature to the list in README.rst.
 3. The pull request should work for Python 2.6, 2.7, and 3.3, and for PyPy. Check 
-   https://travis-ci.org/aericson/django-cdn-js/pull_requests
+   https://travis-ci.org/aericson/django-bower-cdn/pull_requests
    and make sure that the tests pass for all supported Python versions.
 
 Tips
